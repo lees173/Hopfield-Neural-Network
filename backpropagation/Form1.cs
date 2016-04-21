@@ -11,9 +11,25 @@ using System.Diagnostics;
 using System.IO;
 using System.Xml;
 
+
+/*
+ * Training Neural Network(NN) using Train image 
+ * Get Input data from http://yann.lecun.com/exdb/mnist/
+ * MNIST handwritten digits
+ * Match Training image to training label
+ * 
+ * Select Test image and Test label  to test NN.
+ * 
+ * */
+
+
+
+
+
+
 namespace backpropagation
 {
-   // private Image imgTemp;
+   
   
     public partial class Form1 : Form
     {
@@ -54,11 +70,7 @@ namespace backpropagation
             }
 
 
-            
       //      string labelFilePath = path + "train-labels.idx1-ubyte";     
-           
-
-
 
             FileStream fs = new FileStream(@imageFilePath, FileMode.OpenOrCreate);
      //       FileStream fs1 = new FileStream(@labelFilePath, FileMode.OpenOrCreate);
@@ -88,9 +100,7 @@ namespace backpropagation
                 for (int i = 0; i < 28 * 28; i++)
                 {
                    
-                    //byte[] array = BitConverter.GetBytes(r.ReadByte());
-                    data[i] = r.ReadByte();//array[0];
-        
+                    data[i] = r.ReadByte();//array[0];        
                 }
 
                 Bitmap bitmap = new Bitmap(28, 28);
@@ -130,34 +140,11 @@ namespace backpropagation
                     
                 }
 
-
-                /*
-                int imageLabel = Convert.ToInt32(r1.ReadByte());
-                if (!answer.ContainsKey(string.Join("", tempData)))
-                {
-                    answer.Add(string.Join("", tempData), imageLabel);
-                }
-                textBox1.Text = imageLabel.ToString();
-                textBox1.Refresh();
-
-
-                textBox3.Text = "Mapping Label: " + (numberofimages + 1).ToString() + " / " + numImage.ToString();
-                textBox3.Refresh();
-                pictureBox1.Image = bitmap;
-                pictureBox1.Refresh();
-               
-                
-                */
-                
-
-               
-
                 textBox3.Text = "Making Matrix: "+(numberofimages+1).ToString() +" / " + numImage.ToString() ;
                 textBox3.Refresh();
                 pictureBox1.Image = bitmap;
                 pictureBox1.Refresh();
-              // System.Threading.Thread.Sleep(1000);
-                
+                           
             }
             
             r.Close();
@@ -184,7 +171,6 @@ namespace backpropagation
                 saveFile = path+"saveTrainedNN.txt";
             }
 
-          // File.WriteAllLines(saveFile, answer.Select(kvp => string.Format("{0};{1}", kvp.Key, kvp.Value)));
 
             FileStream fs = File.OpenWrite(saveFile);
             BinaryWriter writer = new BinaryWriter(fs);
@@ -226,26 +212,6 @@ namespace backpropagation
             }
 
 
-      //      answer = JsonConvert.DeserializeObject<Dictionary<string, string>>
-    //(File.ReadAllText("SomeFile.txt"));
-
-            /*  TextReader rw = new StreamReader(openFilePath);
-           
-
-              string line;
-              while ((line = rw.ReadLine()) != null) { 
-                 
-
-                  string[] sline = line.Split(';');
-                  if (!answer.ContainsKey(sline[0]))
-                  {
-                      answer.Add(sline[0], Convert.ToInt32(sline[1]));
-                  }
-    
-               }
-             rw.Close();
-             */
-
 
             FileStream fs = File.OpenRead(openFilePath);
             BinaryReader reader = new BinaryReader(fs);
@@ -269,9 +235,7 @@ namespace backpropagation
             textBox3.Refresh();
             reader.Close();
             fs.Close();
-            
-            
-            
+     
 
         }
 
@@ -281,8 +245,6 @@ namespace backpropagation
 
 
          //   string imageFilePath = path + "train-images.idx3-ubyte";
-            
-
 
             OpenFileDialog openFileDlg = new OpenFileDialog();
             openFileDlg.Title = "label file";
@@ -329,10 +291,6 @@ namespace backpropagation
                 byte[] data = new byte[28 * 28];
                 for (int i = 0; i < 28 * 28; i++)
                 {
-                    //Console.WriteLine(BitConverter.to(r.ReadBytes(1).Reverse().ToArray(), 0));
-                    //   byte[] array = BitConverter.GetBytes(r.ReadByte());
-                    // data[i] = array[0];
-                    //   Console.Write(array[0]);
                     data[i] = r.ReadByte();
                 }
 
@@ -405,123 +363,7 @@ namespace backpropagation
 
             r1.Close();
             fs1.Close();
-            /*OpenFileDialog openFileDlg = new OpenFileDialog();
-            openFileDlg.Title = "open file";
-            openFileDlg.DefaultExt = "*.*";
-            openFileDlg.Filter = " All Files (*.*) | *.*";
-            string openFilePath = "";
-
-            if (openFileDlg.ShowDialog() == DialogResult.OK)
-            {
-                openFilePath = openFileDlg.FileName;
-
-            }
-            else
-            {
-                openFilePath = "C:\\Users\\lee\\SkyDrive\\project\\train-images\\train-images.idx3-ubyte";
-            }
-
-            */
-
-
-            /*
-            string openFilePath = "C:\\Users\\lee\\SkyDrive\\project\\train-images\\train-images.idx3-ubyte";
-            FileStream fs = new FileStream(@openFilePath, FileMode.OpenOrCreate);
-
-            BinaryReader r = new BinaryReader(fs);
-
-
-
-
-            for (Int32 i = 0; i < 4; i++)
-            {
-
-                BitConverter.ToInt32(r.ReadBytes(4).Reverse().ToArray(), 0);
-            }
-            string path = @"C:\Users\lee\SkyDrive\project\vision and AI\backpropagation\train-images\trained.txt";
-            String[] outputString = new String[10];
-            TextWriter tw = new StreamWriter(path, false);
-            for (int numberofimages = 0; numberofimages < 600; numberofimages++)
-            {
-                byte[] data = new byte[28 * 28];
-                for (int i = 0; i < 28 * 28; i++)
-                {
-                    //Console.WriteLine(BitConverter.to(r.ReadBytes(1).Reverse().ToArray(), 0));
-                    byte[] array = BitConverter.GetBytes(r.ReadByte());
-                    data[i] = array[0];
-                    //   Console.Write(array[0]);
-                }
-
-                Bitmap bitmap = new Bitmap(28, 28);
-                int[] tempData = new int[28 * 28];
-
-                for (int row = 0; row < 28; row++)
-                {
-                    for (int col = 0; col < 28; col++)
-                    {
-                        bitmap.SetPixel(col, row, Color.FromArgb(255 - data[row * 28 + col], 255 - data[row * 28 + col], 255 - data[row * 28 + col]));
-
-                        if (data[row * 28 + col] == 0)
-                        {
-                            tempData[row * 28 + col] = -1;
-                        }
-                        else
-                        {
-                            tempData[row * 28 + col] = 1;
-                        }
-
-                    }
-                }
-
-
-                int[] output = new int[28 * 28];
-                for (int i = 0; i < 28 * 28; i++)
-                {
-                 //   output[i] = tempData[i];
-                    int sum = tempData[i];
-                    for (int j = 0; j < 28 * 28; j++)
-                    {
-                        sum = sum + tempData[i] * wMatrix[i, j];
-                    }
-
-                    output[i] = sum;
-
-                    if (output[i] > 0)
-                    {
-                        output[i] = 1;
-                    }
-                    else if (output[i] < 0)
-                    {
-                        output[i] = -1;
-                    }
-                    else if (output[i] == 0)
-                    {
-                        output[i] = tempData[i];
-                    }
-                    
-                }
-                textBox1.Text = string.Join(",", output);
-
-                textBox1.Refresh();
-                pictureBox1.Image = bitmap;
-                pictureBox1.Refresh();
-
-                if (!answer.ContainsKey(string.Join("", output)))
-                {
-
-                }
-      
-                
-        }
-        
-
-
-
-            tw.Close();
-
-            r.Close();
-            fs.Close();
-            */
+          
 
         }
 
@@ -588,20 +430,11 @@ namespace backpropagation
                 int[] tempData = new int[28 * 28];
                 for (int i = 0; i < 28 * 28; i++)
                 {
-                    //Console.WriteLine(BitConverter.to(r.ReadBytes(1).Reverse().ToArray(), 0));
-                    //    byte[] array = BitConverter.GetBytes(r.ReadByte());
-                    //  data[i] = array[0];
+
                     data[i] = r.ReadByte();//array[0];
-                    //   Console.Write(array[0]);
-                  //  data = r.ReadBytes(checkImage * 28 * 28).ToArray();
+
                 }
 
-                // data = r.ReadBytes(checkImage * 28 * 28).ToArray();
-
-
-                // int k = 0;
-                //     for (int c = 0; c < 28 *  (checkImage-1); c++)
-             //   {
 
                 for (int col = 0; col < 28; col++)
                 {
@@ -627,8 +460,6 @@ namespace backpropagation
                 pictureBox3.Image = bitmap;
 
                 pictureBox3.Refresh();
-                //System.Threading.Thread.Sleep(100);
-
 
                 int[] output = new int[28 * 28];
                 for (int i = 0; i < 28 * 28; i++)
@@ -667,15 +498,13 @@ namespace backpropagation
                     textBoxAnswer.Text = answer[string.Join("", output)];
                     textBoxAnswer.Refresh();
                     answerNumber = Convert.ToInt32(answer[string.Join("", output)]);
-                    //     pictureBox2.Image = answer[outputString];
+     
                 }
                 else
                 {
                     textBoxAnswer.Text = "?";
                     textBoxAnswer.Refresh();
 
-                    //     textBox4.Text = numberofimages.ToString();
-                    //      textBox4.Refresh();
                 }
 
                int testNumber= Convert.ToInt32(r1.ReadByte());
@@ -707,16 +536,6 @@ namespace backpropagation
                     timer = Convert.ToInt32(textBox6.Text);
                 }
                 System.Threading.Thread.Sleep(timer);
-
-
-
-
-           //     }
-
-
-
-
-                
 
 
             }
@@ -868,20 +687,11 @@ namespace backpropagation
                     int[] tempData = new int[28 * 28];
                     for (int i = 0; i < 28 * 28; i++)
                     {
-                        //Console.WriteLine(BitConverter.to(r.ReadBytes(1).Reverse().ToArray(), 0));
-                        //    byte[] array = BitConverter.GetBytes(r.ReadByte());
-                        //  data[i] = array[0];
+
                         data[i] = r.ReadByte();//array[0];
-                        //   Console.Write(array[0]);
-                        //  data = r.ReadBytes(checkImage * 28 * 28).ToArray();
+
                     }
 
-                    // data = r.ReadBytes(checkImage * 28 * 28).ToArray();
-
-
-                    // int k = 0;
-                    //     for (int c = 0; c < 28 *  (checkImage-1); c++)
-                    //   {
 
                     for (int col = 0; col < 28; col++)
                     {
@@ -907,13 +717,11 @@ namespace backpropagation
                     pictureBox3.Image = bitmap;
 
                     pictureBox3.Refresh();
-                    //System.Threading.Thread.Sleep(100);
-
+  
 
                     int[] output = new int[28 * 28];
                     for (int i = 0; i < 28 * 28; i++)
                     {
-                        //   output[i] = tempData[i];
                         int sum = tempData[i];
                         for (int j = 0; j < 28 * 28; j++)
                         {
@@ -947,15 +755,13 @@ namespace backpropagation
                         textBoxAnswer.Text = answer[string.Join("", output)];
                         textBoxAnswer.Refresh();
                         answerNumber = Convert.ToInt32(answer[string.Join("", output)]);
-                        //     pictureBox2.Image = answer[outputString];
+                    
                     }
                     else
                     {
                         textBoxAnswer.Text = "?";
                         textBoxAnswer.Refresh();
 
-                        //     textBox4.Text = numberofimages.ToString();
-                        //      textBox4.Refresh();
                     }
 
                     int testNumber = Convert.ToInt32(r1.ReadByte());
@@ -987,16 +793,6 @@ namespace backpropagation
                         timer = Convert.ToInt32(textBox6.Text);
                     }
                     System.Threading.Thread.Sleep(timer);
-
-
-
-
-                    //     }
-
-
-
-
-
 
 
                 }
