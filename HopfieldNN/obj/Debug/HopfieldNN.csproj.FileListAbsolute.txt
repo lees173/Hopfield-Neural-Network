@@ -1,0 +1,9 @@
+C:\Users\lee\SkyDrive\project\vision and AI\backup\HopfieldNN\HopfieldNN\bin\Debug\backpropagation.exe.config
+C:\Users\lee\SkyDrive\project\vision and AI\backup\HopfieldNN\HopfieldNN\obj\Debug\backpropagation.exe
+C:\Users\lee\SkyDrive\project\vision and AI\backup\HopfieldNN\HopfieldNN\obj\Debug\backpropagation.pdb
+C:\Users\lee\SkyDrive\project\vision and AI\backup\HopfieldNN\HopfieldNN\bin\Debug\backpropagation.exe
+C:\Users\lee\SkyDrive\project\vision and AI\backup\HopfieldNN\HopfieldNN\bin\Debug\backpropagation.pdb
+C:\Users\lee\SkyDrive\project\vision and AI\backup\HopfieldNN\HopfieldNN\obj\Debug\HopfieldNN.csprojResolveAssemblyReference.cache
+C:\Users\lee\SkyDrive\project\vision and AI\backup\HopfieldNN\HopfieldNN\obj\Debug\HopfieldNN.Form1.resources
+C:\Users\lee\SkyDrive\project\vision and AI\backup\HopfieldNN\HopfieldNN\obj\Debug\HopfieldNN.Properties.Resources.resources
+C:\Users\lee\SkyDrive\project\vision and AI\backup\HopfieldNN\HopfieldNN\obj\Debug\HopfieldNN.csproj.GenerateResource.Cache
